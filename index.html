@@ -168,6 +168,26 @@ section,.band,.raw-s,.hindi-s,.photo-s,.dv{position:relative;z-index:2}
 @keyframes pulse{0%,100%{opacity:.2}50%{opacity:1}}
 
 #musicFallback{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:30;opacity:.0;pointer-events:none;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;transition:opacity .3s}#musicFallback audio{width:210px;height:28px;display:block;margin-top:4px}#musicFallback span{display:block;text-align:center}
+
+/* NEW UNIVERSE SECTIONS */
+.space-s{padding:8rem 2rem;max-width:900px;margin:0 auto;text-align:center;position:relative}
+.space-s::before{content:'✦  ·  ✧  ·  ✦  ·  ✧';display:block;color:var(--dimmer);letter-spacing:.7em;font-size:.65rem;margin-bottom:3rem}
+.space-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,9vw,6.5rem);font-weight:300;line-height:.9;color:var(--pale);font-style:italic}
+.space-title em{color:var(--rose)}
+.space-copy{max-width:650px;margin:2.5rem auto 0;color:var(--dim);font-size:clamp(1rem,2.2vw,1.3rem);line-height:2.05;font-style:italic}
+.alone{padding:7rem 2rem;max-width:680px;margin:0 auto}
+.alone-card{border:1px solid rgba(196,168,130,.1);background:linear-gradient(135deg,rgba(196,168,130,.025),rgba(184,112,112,.035));padding:3rem 2.5rem;position:relative}
+.alone-card::before{content:'ALONE, NOT EMPTY';position:absolute;top:-.55rem;left:1.5rem;background:var(--bg);padding:0 .8rem;font-size:.55rem;letter-spacing:.35em;color:var(--dim)}
+.alone-card p{font-family:'Cormorant Garamond',serif;font-size:clamp(1.35rem,3.2vw,2rem);line-height:1.75;color:var(--pale);font-style:italic}
+.alone-card p+p{margin-top:1.4rem;color:var(--dust);font-size:clamp(1rem,2.2vw,1.25rem)}
+.thoughts{padding:7rem 2rem;max-width:760px;margin:0 auto}
+.thought{padding:2.2rem 0;border-bottom:1px solid rgba(196,168,130,.08);font-family:'Cormorant Garamond',serif;font-size:clamp(1.25rem,3vw,1.9rem);line-height:1.7;color:var(--pale)}
+.thought small{display:block;font-family:'EB Garamond',serif;font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);margin-bottom:.8rem}
+.thought em{color:var(--rose)}
+.nav-universe{position:fixed;top:1.2rem;left:1.2rem;z-index:9993;display:flex;gap:.35rem;flex-wrap:wrap;max-width:calc(100vw - 2.4rem)}
+.nav-universe a{font-size:.53rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);text-decoration:none;border:1px solid rgba(196,168,130,.1);padding:.45rem .55rem;background:rgba(7,6,10,.7);backdrop-filter:blur(8px);transition:.3s}
+.nav-universe a:hover{color:var(--dust);border-color:rgba(196,168,130,.3)}
+@media(max-width:600px){.nav-universe a:nth-child(n+5){display:none}.alone-card{padding:2.3rem 1.4rem}}
 </style>
 </head>
 
@@ -179,7 +199,10 @@ section,.band,.raw-s,.hindi-s,.photo-s,.dv{position:relative;z-index:2}
 <audio id="bgMusic" preload="auto" loop playsinline><source src="audio/theme.mp3" type="audio/mpeg"></audio>
 <div id="musicFallback" aria-hidden="true"><span>music</span><audio controls preload="none"><source src="audio/theme.mp3" type="audio/mpeg"></audio></div>
 
-<section class="hero">
+<nav class="nav-universe" aria-label="Universe navigation">
+<a href="#me">me</a><a href="#space">space</a><a href="#alone">alone</a><a href="#interests">interests</a><a href="#thoughts">thoughts</a><a href="#future">future</a>
+</nav>
+<section class="hero" id="me">
   <p class="hero-eye">welcome to my universe</p>
   <h1 class="hero-title">Prajwal<em>quiet. curious. becoming.</em></h1>
   <div class="hero-vline"></div>
@@ -210,7 +233,23 @@ section,.band,.raw-s,.hindi-s,.photo-s,.dv{position:relative;z-index:2}
   <div class="reveal"><p style="color:var(--dim);font-style:italic">And travelling? I want to see more of this world. Different roads, different cities, different skies — places that remind me there is always something beyond the life I already know.</p></div>
 </div>
 
-<div class="love-wrap">
+
+<section class="space-s" id="space">
+  <p class="slabel" style="justify-content:center">somewhere between here and the stars</p>
+  <h2 class="space-title reveal">I love <em>space.</em></h2>
+  <p class="space-copy reveal">Maybe because it is quiet. Maybe because it makes my problems feel smaller. I can look at the stars for a while and remember that there is a whole universe outside the little world inside my head.</p>
+  <p class="space-copy reveal" style="color:var(--dust)">There is something beautiful about being a tiny person under an endless sky — still dreaming anyway.</p>
+</section>
+
+<section class="alone" id="alone">
+  <p class="slabel">the part of me people don't always see</p>
+  <div class="alone-card reveal">
+    <p>I actually like living alone. Not because I hate people — I just love having a little world that belongs to me.</p>
+    <p>Quiet mornings. Late-night music. My own thoughts. No need to explain every silence. Sometimes solitude feels less like loneliness and more like coming home to myself.</p>
+  </div>
+</section>
+
+<div class="love-wrap" id="interests">
   <p class="slabel">things that feel like me</p>
   <p class="love-intro reveal">I’m made of small obsessions,<br>quiet dreams,<br>and things that make life feel like mine.</p>
   <ul class="love-list" id="loveList">
@@ -260,6 +299,26 @@ section,.band,.raw-s,.hindi-s,.photo-s,.dv{position:relative;z-index:2}
   <div class="poem reveal"><div class="pnum">03</div><p>I’m learning that losing</p><p>doesn’t mean I’m finished.</p><p>Sometimes it just means</p><p>I have to rebuild differently.</p></div>
 </section>
 
+
+<section class="thoughts" id="thoughts">
+  <p class="slabel">things I think about too much</p>
+  <div class="thought reveal"><small>01 · perspective</small>“Kabhi kabhi <em>khamoshi</em> bhi jawab hoti hai.”</div>
+  <div class="thought reveal"><small>02 · growth</small>“Jo cheezein mujhe tod gayi, unhone hi mujhe dobara banana sikhaya.”</div>
+  <div class="thought reveal"><small>03 · life</small>“Har kisi ko meri kahani samajhna zaroori nahi. Mujhe bas itna pata hai ki main usse jee raha hoon.”</div>
+  <div class="thought reveal"><small>04 · solitude</small>“I stopped being afraid of being alone when I realised I could actually enjoy my own company.”</div>
+  <div class="thought reveal"><small>05 · dreams</small>“Mujhe duniya se jeetna nahi hai. Mujhe bas <em>khud se haarna band karna hai.</em>”</div>
+  <div class="thought reveal"><small>06 · becoming</small>“Maybe I’m not behind. Maybe I’m just taking a road nobody around me can see.”</div>
+  <div class="thought reveal"><small>07 · kindness</small>“Duniya ne mujhe sakht hona sikhaya, par main phir bhi naram rehna choose karta hoon.”</div>
+</section>
+
+<div class="band db reveal"><p>“Main khud ko dhoondhne nahi nikla hoon.<br>Main khud ko banane nikla hoon.”</p></div>
+
+<section class="poetry" id="future">
+  <p class="slabel">the life I imagine</p>
+  <div class="poem large reveal"><div class="pnum">∞</div><p>A quiet home.</p><p>A fast car outside.</p><p>Music playing somewhere.</p><p>A passport full of places.</p><span class="gap"></span><p>Enough money to breathe.</p><p>Enough freedom to leave.</p><p>Enough peace to stay.</p></div>
+  <div class="poem reveal"><div class="pnum">and maybe</div><p>I’ll sit somewhere far from everything familiar,</p><p>look at the night sky,</p><p>and realise that the life I once imagined</p><p>quietly became the life I’m living.</p></div>
+</section>
+
 <div class="dv"><span>∗</span></div>
 <div class="band rb reveal"><p>My life isn’t a finished story.<br>It’s a draft I’m still brave enough to keep writing.</p></div>
 
@@ -271,7 +330,7 @@ section,.band,.raw-s,.hindi-s,.photo-s,.dv{position:relative;z-index:2}
 <div class="closing" style="padding:7rem 1.5rem 9rem;text-align:center">
   <p class="closing-last reveal" style="margin-bottom:3rem;font-style:italic;color:var(--dimmer);font-size:.7rem;letter-spacing:.28em;text-transform:uppercase">written by Prajwal</p>
   <p class="closing-text reveal" style="color:var(--dust)">20 years old.<br>Still learning. Still losing. Still growing.<br>Still becoming.</p>
-  <p class="closing-last reveal" style="font-style:italic;color:var(--dim);font-size:.85rem;letter-spacing:.1em;margin-top:1.2rem;text-transform:none">cars · F1 · music · games · trading · travelling</p>
+  <p class="closing-last reveal" style="font-style:italic;color:var(--dim);font-size:.85rem;letter-spacing:.1em;margin-top:1.2rem;text-transform:none">cars · F1 · music · space · games · trading · travelling · solitude</p>
   <p class="closing-text reveal" style="font-size:clamp(1.2rem,3vw,1.9rem);color:var(--rose);font-style:italic;letter-spacing:.04em;max-width:420px;margin:3rem auto 0">“I may not know exactly where I’m going yet.<br>But I know I’m not staying where I am.”</p>
 </div>
 
