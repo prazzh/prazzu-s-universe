@@ -237,16 +237,6 @@ main, section, .band, .origin, .love-wrap, .poetry, .hindi-s, .interlude, .space
 .message-hint{font-size:.65rem;letter-spacing:.12em;color:var(--dimmer);margin-top:.9rem}
 
 /* SECRET BIOGRAPHY VIEWERS */
-/* VISITOR NAME GATE */
-.gate-locked{overflow:hidden;}
-.visitor-gate{position:fixed;inset:0;z-index:200;background:rgba(2,1,6,.86);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .35s ease}
-.visitor-gate.open{opacity:1;pointer-events:auto}
-.visitor-gate-card{width:min(390px,100%);padding:32px 25px;text-align:center;border:1px solid rgba(196,168,130,.22);background:linear-gradient(155deg,rgba(15,12,21,.98),rgba(5,4,10,.99));box-shadow:0 30px 100px rgba(0,0,0,.7)}
-.visitor-gate-kicker{font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--dim);margin-bottom:12px}
-.visitor-gate-title{font:italic 2rem 'Cormorant Garamond',serif;color:var(--pale);margin-bottom:9px}
-.visitor-gate-copy{font-size:.78rem;line-height:1.7;color:var(--dim);margin-bottom:22px}
-.visitor-gate-form{display:flex;gap:8px}.visitor-gate-form input{min-width:0;flex:1;background:rgba(255,255,255,.025);border:1px solid rgba(196,168,130,.16);padding:12px;color:var(--pale);outline:none;font:inherit}.visitor-gate-form button{border:1px solid rgba(196,168,130,.22);background:rgba(196,168,130,.07);color:var(--dust);padding:0 16px;cursor:pointer;font:italic .9rem 'Cormorant Garamond',serif}
-.visitor-gate-note{font-size:.58rem;color:var(--dimmer);margin-top:12px;line-height:1.5}
 .secret-viewer-trigger{position:fixed;left:18px;bottom:18px;z-index:30;width:38px;height:38px;border:1px solid rgba(196,168,130,.14);background:rgba(5,4,10,.38);backdrop-filter:blur(8px);color:rgba(196,168,130,.45);font:14px Georgia,serif;cursor:pointer;display:grid;place-items:center;opacity:.5;transition:.3s}
 .secret-viewer-trigger:hover{opacity:1;border-color:rgba(196,168,130,.3)}
 .viewer-overlay{position:fixed;inset:0;z-index:100;background:rgba(2,1,6,.72);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:22px;opacity:0;pointer-events:none;transition:opacity .35s ease}
@@ -258,7 +248,6 @@ main, section, .band, .origin, .love-wrap, .poetry, .hindi-s, .interlude, .space
 .viewer-stat{display:flex;align-items:baseline;gap:9px;margin:4px 0 24px}.viewer-count{font:2.5rem 'Cormorant Garamond',serif;color:var(--pale)}.viewer-label{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
 .viewer-list{display:flex;flex-direction:column;gap:9px;margin-bottom:22px}.viewer-row{display:flex;align-items:center;gap:12px;padding:12px 10px;border:1px solid rgba(196,168,130,.08);background:rgba(196,168,130,.025)}
 .viewer-avatar{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(196,168,130,.18);font:italic 1rem 'Cormorant Garamond',serif;color:var(--dust);flex:none}.viewer-info{min-width:0;flex:1}.viewer-name{font-size:.9rem;color:var(--pale)}.viewer-time{font-size:.66rem;color:var(--dimmer);margin-top:2px}.viewer-empty{text-align:center;padding:25px 10px;color:var(--dim);font-style:italic}
-.viewer-sign{border-top:1px solid rgba(196,168,130,.1);padding-top:19px}.viewer-sign p{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin:0 0 10px}.viewer-form{display:flex;gap:8px}.viewer-form input{min-width:0;flex:1;background:rgba(255,255,255,.025);border:1px solid rgba(196,168,130,.14);padding:11px 12px;color:var(--pale);outline:none;font:inherit}.viewer-form button{border:1px solid rgba(196,168,130,.2);background:rgba(196,168,130,.06);color:var(--dust);padding:0 13px;cursor:pointer;font:italic .9rem 'Cormorant Garamond',serif}.viewer-note{font-size:.62rem!important;letter-spacing:.03em!important;text-transform:none!important;color:var(--dimmer)!important;margin-top:9px!important;line-height:1.5}
 
 .story-continue{position:absolute;left:50%;bottom:5.5rem;transform:translateX(-50%);border:1px solid rgba(196,168,130,.28);background:rgba(196,168,130,.055);color:var(--dust);padding:12px 20px;cursor:pointer;font:italic 1rem 'Cormorant Garamond',serif;letter-spacing:.06em;transition:.25s;z-index:3}.story-continue:hover{background:rgba(196,168,130,.11);border-color:rgba(196,168,130,.5);transform:translateX(-50%) translateY(-2px)}
 @media(max-width:650px){.story-continue{bottom:4.5rem;font-size:.95rem;padding:11px 17px}}
@@ -266,8 +255,7 @@ main, section, .band, .origin, .love-wrap, .poetry, .hindi-s, .interlude, .space
 </style>
 </head>
 
-<body><div class="visitor-gate" id="visitorGate" aria-hidden="true"><div class="visitor-gate-card"><div class="visitor-gate-kicker">a little secret</div><div class="visitor-gate-title">Before entering My Milky-way 🌌</div><div class="visitor-gate-copy">Leave your name first. Then your visit can appear in the private biography viewer.</div><div class="visitor-gate-form"><input id="visitorGateName" maxlength="32" autocomplete="name" placeholder="your name…"><button id="visitorGateEnter" type="button">enter</button></div><div class="visitor-gate-note">Your name is used only for this biography-view feature.</div></div></div>
-<div class="progress" id="prog"></div>
+<body><div class="progress" id="prog"></div>
 <div class="cur" id="cur"></div><div class="cur-r" id="ring"></div>
 <canvas id="particles" aria-hidden="true"></canvas>
 <button id="snd" aria-label="Play background music" type="button">&#9833; play music</button>
@@ -281,13 +269,7 @@ main, section, .band, .origin, .love-wrap, .poetry, .hindi-s, .interlude, .space
   <div class="viewer-card" role="dialog" aria-modal="true" aria-label="Private biography views">
     <div class="viewer-top"><div class="viewer-brand">private · biography</div><button class="viewer-close" id="viewerClose" aria-label="Close">×</button></div>
     <div class="viewer-stat"><span class="viewer-count" id="viewerCount">0</span><span class="viewer-label">views</span></div>
-    <div class="viewer-list" id="viewerList"><div class="viewer-empty">No named visitors yet.<br>Some people leave quietly.</div></div>
-    <div class="viewer-sign">
-      <p>leave your name</p>
-      <div class="viewer-form"><input id="viewerName" maxlength="32" autocomplete="off" placeholder="your name…"><button id="viewerSubmit" type="button">enter</button></div>
-      <p class="viewer-note">A private, Instagram-style guest list. Cloud sync is active.</p>
-    </div>
-  </div>
+    <div class="viewer-list" id="viewerList"><div class="viewer-empty">No viewer names recorded.</div></div></div>
 </div>
 
 <nav class="nav-universe" aria-label="Universe navigation">
@@ -344,35 +326,10 @@ main, section, .band, .origin, .love-wrap, .poetry, .hindi-s, .interlude, .space
   <div class="story-copy reveal"><p>I love you both, guys. ❤️</p></div>
 </section>
 
-<section class="story-section" id="piu">
-  <p class="story-kicker reveal">private chapter · her</p>
-  <h2 class="story-title reveal">Piu —<br><span>the chapter I still carry.</span></h2>
-  <div class="story-copy">
-    <p class="reveal">August 2025. We met in a game lobby, and neither of us really knew the other. No dramatic introduction. No long conversation. Sometimes we didn't even turn our mics on. We just played — me, Peetu and Piu.</p>
-    <p class="reveal">We'd play until two or three in the morning without even realising how fast time was moving. And somewhere inside those late nights, something changed.</p>
-    <p class="reveal">The stranger from that lobby slowly became someone I looked forward to talking to. Our bonding grew. We became attached. Then came November 4, 2025.</p>
-    <p class="reveal">I proposed. She didn't even take much time. She just said yes. And I remember thinking: <em>is this actually real?</em></p>
-    <p class="reveal">We already had each other's Instagram and numbers and used to text, but we'd barely spoken properly on calls or through the game mic. After that, everything felt more real.</p>
-    <p class="reveal">I never expected her to become so important to me. But she did.</p>
-    <p class="reveal">Our story wasn't perfect. We fought a lot. The first two months were full of little heartbreaks. Yet somehow, sometimes she came back to me and sometimes I went back to her. We kept finding each other because we had become attached.</p>
-    <p class="reveal">She stayed with me for almost nine months. And looking back, I realise she never asked me for the world. She mostly wanted my time.</p>
-    <p class="reveal">And I couldn't give her enough of it. Trading, gaming and my own things kept taking pieces of the time I should have given her. That's my mistake, and I can't rewrite it.</p>
-    <p class="reveal">I don't know if I'd have been the best husband for her. When I look at her loyalty, love and care, sometimes I honestly feel like I should reject myself before she ever has to.</p>
-    <p class="reveal">Not everyone gets lucky enough to meet a girl like her. I did. I just didn't know how to keep her happy.</p>
-  </div>
-  <div class="private-love reveal">
-    <h3>♡ for Piu ♡</h3>
-    <p class="love-quote">"I couldn't give you the forever you deserved, but I'll always be grateful for the time you gave me."</p>
-    <div class="story-copy" style="max-width:650px;margin:auto;color:var(--dim)"><p>Please don't stay waiting for me. You deserve love, peace, loyalty and someone who makes you feel chosen every day.</p><p>I'm sorry for my rude behaviour, for hurting you, and for the moments when you deserved love and I gave you pain.</p><p>We never even got a proper goodbye. So if this really is goodbye, let me say it properly: thank you for being a beautiful part of my life.</p><p>I still love you. And you have every right to hate me for the things I did. ❤️‍🩹</p></div>
-    <div class="hearts">♡ ♥ ♡ ♥ ♡</div>
-  </div>
-</section>
-
 <section class="story-section">
   <p class="story-kicker reveal">the two chapters that shaped me</p>
   <div class="people-duo">
     <div class="duo-card reveal"><h4>Mittu</h4><p>The brother I found — the person who stayed beside me when the dream was still only an idea.</p></div>
-    <div class="duo-card reveal"><h4>Piu</h4><p>The love I found — and the chapter that taught me about love, time, regret, attachment and letting go.</p></div>
   </div>
 </section>
 
@@ -520,7 +477,7 @@ main, section, .band, .origin, .love-wrap, .poetry, .hindi-s, .interlude, .space
     <textarea id="messageText" maxlength="500" placeholder="write something for me…"></textarea>
     <div class="message-actions"><button id="messageSend" type="button">♡ Send</button></div>
   </div>
-  <div class="message-hint">your name from the beginning of the story will be attached to your message</div>
+  <div class="message-hint">your message will be posted without your name</div>
   <div id="messageList"></div>
 </section>
 
@@ -638,32 +595,23 @@ if(loveListEl){
 }
 
 
-// SECRET BIOGRAPHY VIEWERS + VISITOR NAME GATE + OPTIONAL CLOUD SYNC
+// SECRET BIOGRAPHY VIEWERS — read-only
 (function(){
-  const gate=document.getElementById('visitorGate'), gateInput=document.getElementById('visitorGateName'), gateEnter=document.getElementById('visitorGateEnter');
   const trigger=document.getElementById('viewerTrigger'), overlay=document.getElementById('viewerOverlay'), close=document.getElementById('viewerClose');
-  const list=document.getElementById('viewerList'), count=document.getElementById('viewerCount'), input=document.getElementById('viewerName'), submit=document.getElementById('viewerSubmit');
-  if(!gate||!gateInput||!gateEnter)return;
-
-  // CLOUD SETUP:
-  // Replace these two values after creating a Supabase project.
-  // The site still works locally if these remain blank.
-  const CLOUD_URL = 'https://odfqfkqprvxslslhjxfj.supabase.co';
-  const CLOUD_ANON_KEY = 'sb_publishable_pSX9OmeSDa4cVqytpwVswQ_B7eu9Stb';
-  const cloudReady = /^https:\/\/[^\s]+\.supabase\.co$/.test(CLOUD_URL) && CLOUD_ANON_KEY.length > 20;
-  const cloudHeaders = cloudReady ? {'apikey':CLOUD_ANON_KEY,'Authorization':'Bearer '+CLOUD_ANON_KEY,'Content-Type':'application/json'} : null;
-  const key='prazzh_bio_viewers_v4';
-  const visitorKey='prazzh_my_visitor_name_session_v2';
+  const list=document.getElementById('viewerList'), count=document.getElementById('viewerCount');
+  if(!trigger||!overlay||!close)return;
+  const CLOUD_URL='https://odfqfkqprvxslslhjxfj.supabase.co';
+  const CLOUD_ANON_KEY='sb_publishable_pSX9OmeSDa4cVqytpwVswQ_B7eu9Stb';
+  const cloudReady=/^https:\/\/[^\s]+\.supabase\.co$/.test(CLOUD_URL)&&CLOUD_ANON_KEY.length>20;
+  const cloudHeaders=cloudReady?{'apikey':CLOUD_ANON_KEY,'Authorization':'Bearer '+CLOUD_ANON_KEY}:null;
   let viewers=[];
-  try{viewers=JSON.parse(localStorage.getItem(key)||'[]');if(!Array.isArray(viewers))viewers=[];}catch(e){viewers=[];}
-  const safeName=n=>(n||'Anonymous').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  function safeName(n){return (n||'Anonymous').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
   function render(){
     if(count)count.textContent=viewers.length;
     if(list)list.innerHTML=!viewers.length
-      ? '<div class="viewer-empty">No named visitors yet.<br>Some people leave quietly.</div>'
+      ? '<div class="viewer-empty">No viewer names recorded.</div>'
       : viewers.slice().reverse().map(v=>{const n=safeName(v.name),d=new Date(v.time),w=isNaN(d)?'recently':d.toLocaleString([],{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});return `<div class="viewer-row"><div class="viewer-avatar">${n.charAt(0).toUpperCase()}</div><div class="viewer-info"><div class="viewer-name">${n}</div><div class="viewer-time">viewed · ${w}</div></div></div>`}).join('');
   }
-  function save(){try{localStorage.setItem(key,JSON.stringify(viewers.slice(-100)));}catch(e){}}
   async function cloudFetch(){
     if(!cloudReady)return;
     try{
@@ -671,55 +619,13 @@ if(loveListEl){
       if(!r.ok)throw new Error('cloud read '+r.status);
       const rows=await r.json();
       viewers=Array.isArray(rows)?rows.map(x=>({name:x.name,time:x.time})):[];
-      save(); render();
-    }catch(e){ console.warn('Cloud viewer sync unavailable:',e); }
+      render();
+    }catch(e){console.warn('Cloud viewer sync unavailable:',e);}
   }
-  async function record(name){
-    const clean=name.trim();if(!clean)return;
-    const item={name:clean,time:new Date().toISOString()};
-    viewers.push(item);save();render();
-    if(cloudReady){
-      try{
-        const r=await fetch(CLOUD_URL+'/rest/v1/bio_viewers',{method:'POST',headers:{...cloudHeaders,'Prefer':'return=minimal'},body:JSON.stringify(item)});
-        if(!r.ok)throw new Error('cloud write '+r.status);
-        await cloudFetch();
-      }catch(e){ console.warn('Cloud viewer save unavailable:',e); }
-    }
-  }
-
-  let gateOpen=false, triggered=false;
-  function showGate(){
-    if(gateOpen)return; gateOpen=true;
-    gate.classList.add('open'); gate.setAttribute('aria-hidden','false'); document.body.classList.add('gate-locked');
-    setTimeout(()=>{gateInput.focus();gateInput.select();},120);
-  }
-  async function enter(){
-    const name=gateInput.value.trim(); if(!name){gateInput.focus();return;}
-    try{sessionStorage.setItem(visitorKey,name);}catch(e){}
-    await record(name);
-    gate.classList.remove('open'); gate.setAttribute('aria-hidden','true'); document.body.classList.remove('gate-locked'); gateOpen=false;
-  }
-
-  // AUTOMATIC: the prompt appears after the visitor scrolls beyond the intro.
-  let alreadyNamed=''; try{alreadyNamed=sessionStorage.getItem(visitorKey)||'';}catch(e){}
-  const hero=document.getElementById('me');
-  if(hero && !alreadyNamed){
-    const triggerPoint=Math.max(160, Math.min(hero.offsetHeight-40, Math.round(hero.offsetHeight*0.35)));
-    const check=()=>{
-      if(triggered||gateOpen)return;
-      if(window.scrollY>=triggerPoint){triggered=true;showGate();window.removeEventListener('scroll',check);window.removeEventListener('wheel',check);window.removeEventListener('touchmove',check);}
-    };
-    window.addEventListener('scroll',check,{passive:true}); window.addEventListener('wheel',check,{passive:true}); window.addEventListener('touchmove',check,{passive:true}); setTimeout(check,300);
-  }
-
-  gateEnter.addEventListener('click',enter); gateInput.addEventListener('keydown',e=>{if(e.key==='Enter')enter();});
-  if(trigger&&overlay&&close){
-    const open=async()=>{overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');render();await cloudFetch();setTimeout(()=>input&&input.focus(),150)};
-    const shut=()=>{overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true')};
-    trigger.addEventListener('click',open);close.addEventListener('click',shut);overlay.addEventListener('click',e=>{if(e.target===overlay)shut()});document.addEventListener('keydown',e=>{if(e.key==='Escape')shut()});
-  }
-  if(submit&&input){submit.addEventListener('click',()=>{const n=input.value.trim();if(!n)return;record(n);input.value=''});input.addEventListener('keydown',e=>{if(e.key==='Enter')submit.click()});}
-  render(); cloudFetch();
+  const open=async()=>{overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');render();await cloudFetch()};
+  const shut=()=>{overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true')};
+  trigger.addEventListener('click',open);close.addEventListener('click',shut);overlay.addEventListener('click',e=>{if(e.target===overlay)shut()});document.addEventListener('keydown',e=>{if(e.key==='Escape')shut()});
+  render();
 })();
 </script>
 </html>
