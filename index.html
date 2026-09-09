@@ -222,10 +222,34 @@ section,.band,.raw-s,.hindi-s,.photo-s,.dv{position:relative;z-index:2}
 /* Keep revealed text stable while scrolling */
 main, section, .band, .origin, .love-wrap, .poetry, .hindi-s, .interlude, .space-s, .alone, .thoughts, .letter-section, .closing { position:relative; z-index:1; }
 #particles{z-index:0 !important;}
+
+/* SECRET BIOGRAPHY VIEWERS */
+/* VISITOR NAME GATE */
+.visitor-gate{position:fixed;inset:0;z-index:200;background:rgba(2,1,6,.86);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .35s ease}
+.visitor-gate.open{opacity:1;pointer-events:auto}
+.visitor-gate-card{width:min(390px,100%);padding:32px 25px;text-align:center;border:1px solid rgba(196,168,130,.22);background:linear-gradient(155deg,rgba(15,12,21,.98),rgba(5,4,10,.99));box-shadow:0 30px 100px rgba(0,0,0,.7)}
+.visitor-gate-kicker{font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--dim);margin-bottom:12px}
+.visitor-gate-title{font:italic 2rem 'Cormorant Garamond',serif;color:var(--pale);margin-bottom:9px}
+.visitor-gate-copy{font-size:.78rem;line-height:1.7;color:var(--dim);margin-bottom:22px}
+.visitor-gate-form{display:flex;gap:8px}.visitor-gate-form input{min-width:0;flex:1;background:rgba(255,255,255,.025);border:1px solid rgba(196,168,130,.16);padding:12px;color:var(--pale);outline:none;font:inherit}.visitor-gate-form button{border:1px solid rgba(196,168,130,.22);background:rgba(196,168,130,.07);color:var(--dust);padding:0 16px;cursor:pointer;font:italic .9rem 'Cormorant Garamond',serif}
+.visitor-gate-note{font-size:.58rem;color:var(--dimmer);margin-top:12px;line-height:1.5}
+.secret-viewer-trigger{position:fixed;left:18px;bottom:18px;z-index:30;width:38px;height:38px;border:1px solid rgba(196,168,130,.14);background:rgba(5,4,10,.38);backdrop-filter:blur(8px);color:rgba(196,168,130,.45);font:14px Georgia,serif;cursor:pointer;display:grid;place-items:center;opacity:.5;transition:.3s}
+.secret-viewer-trigger:hover{opacity:1;border-color:rgba(196,168,130,.3)}
+.viewer-overlay{position:fixed;inset:0;z-index:100;background:rgba(2,1,6,.72);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:22px;opacity:0;pointer-events:none;transition:opacity .35s ease}
+.viewer-overlay.open{opacity:1;pointer-events:auto}
+.viewer-card{width:min(420px,100%);max-height:min(690px,88vh);overflow:auto;border:1px solid rgba(196,168,130,.22);background:linear-gradient(155deg,rgba(15,12,21,.97),rgba(5,4,10,.98));box-shadow:0 30px 100px rgba(0,0,0,.6);padding:26px 22px;color:var(--pale);position:relative}
+.viewer-top{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(196,168,130,.1);padding-bottom:17px;margin-bottom:18px}
+.viewer-brand{font:italic 1.45rem 'Cormorant Garamond',serif;letter-spacing:.05em;color:var(--dust)}
+.viewer-close{background:none;border:0;color:var(--dim);font-size:22px;cursor:pointer;padding:3px 7px}
+.viewer-stat{display:flex;align-items:baseline;gap:9px;margin:4px 0 24px}.viewer-count{font:2.5rem 'Cormorant Garamond',serif;color:var(--pale)}.viewer-label{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
+.viewer-list{display:flex;flex-direction:column;gap:9px;margin-bottom:22px}.viewer-row{display:flex;align-items:center;gap:12px;padding:12px 10px;border:1px solid rgba(196,168,130,.08);background:rgba(196,168,130,.025)}
+.viewer-avatar{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(196,168,130,.18);font:italic 1rem 'Cormorant Garamond',serif;color:var(--dust);flex:none}.viewer-info{min-width:0;flex:1}.viewer-name{font-size:.9rem;color:var(--pale)}.viewer-time{font-size:.66rem;color:var(--dimmer);margin-top:2px}.viewer-empty{text-align:center;padding:25px 10px;color:var(--dim);font-style:italic}
+.viewer-sign{border-top:1px solid rgba(196,168,130,.1);padding-top:19px}.viewer-sign p{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin:0 0 10px}.viewer-form{display:flex;gap:8px}.viewer-form input{min-width:0;flex:1;background:rgba(255,255,255,.025);border:1px solid rgba(196,168,130,.14);padding:11px 12px;color:var(--pale);outline:none;font:inherit}.viewer-form button{border:1px solid rgba(196,168,130,.2);background:rgba(196,168,130,.06);color:var(--dust);padding:0 13px;cursor:pointer;font:italic .9rem 'Cormorant Garamond',serif}.viewer-note{font-size:.62rem!important;letter-spacing:.03em!important;text-transform:none!important;color:var(--dimmer)!important;margin-top:9px!important;line-height:1.5}
+
 </style>
 </head>
 
-<body>
+<body><div class="visitor-gate" id="visitorGate" aria-hidden="true"><div class="visitor-gate-card"><div class="visitor-gate-kicker">a little secret</div><div class="visitor-gate-title">Before entering My Milky-way 🌌</div><div class="visitor-gate-copy">Leave your name first. Then your visit can appear in the private biography viewer.</div><div class="visitor-gate-form"><input id="visitorGateName" maxlength="32" autocomplete="name" placeholder="your name…"><button id="visitorGateEnter" type="button">enter</button></div><div class="visitor-gate-note">Your name is used only for this biography-view feature.</div></div></div>
 <div class="progress" id="prog"></div>
 <div class="cur" id="cur"></div><div class="cur-r" id="ring"></div>
 <canvas id="particles" aria-hidden="true"></canvas>
@@ -234,6 +258,21 @@ main, section, .band, .origin, .love-wrap, .poetry, .hindi-s, .interlude, .space
 <div id="musicFallback" aria-hidden="true"><span>music</span><audio controls preload="none"></audio></div>
 
 <div class="signature-fixed" aria-label="Prazhu">prazhu</div>
+
+<button class="secret-viewer-trigger" id="viewerTrigger" aria-label="Private biography views">◉</button>
+<div class="viewer-overlay" id="viewerOverlay" aria-hidden="true">
+  <div class="viewer-card" role="dialog" aria-modal="true" aria-label="Private biography views">
+    <div class="viewer-top"><div class="viewer-brand">private · biography</div><button class="viewer-close" id="viewerClose" aria-label="Close">×</button></div>
+    <div class="viewer-stat"><span class="viewer-count" id="viewerCount">0</span><span class="viewer-label">views</span></div>
+    <div class="viewer-list" id="viewerList"><div class="viewer-empty">No named visitors yet.<br>Some people leave quietly.</div></div>
+    <div class="viewer-sign">
+      <p>leave your name</p>
+      <div class="viewer-form"><input id="viewerName" maxlength="32" autocomplete="off" placeholder="your name…"><button id="viewerSubmit" type="button">enter</button></div>
+      <p class="viewer-note">A private, Instagram-style guest list. Names are saved in this browser only.</p>
+    </div>
+  </div>
+</div>
+
 <nav class="nav-universe" aria-label="Universe navigation">
 <a href="#me">me</a><a href="#people">people</a><a href="#space">space</a><a href="#alone">alone</a><a href="#interests">interests</a><a href="#thoughts">thoughts</a><a href="#future">future</a>
 </nav>
@@ -549,6 +588,35 @@ if(loveListEl){
   }),{threshold:.04});
   lo.observe(loveListEl);
 }
+
+
+// SECRET BIOGRAPHY VIEWERS + VISITOR NAME GATE
+(function(){
+  const gate=document.getElementById('visitorGate'), gateInput=document.getElementById('visitorGateName'), gateEnter=document.getElementById('visitorGateEnter');
+  const trigger=document.getElementById('viewerTrigger'), overlay=document.getElementById('viewerOverlay'), close=document.getElementById('viewerClose');
+  const list=document.getElementById('viewerList'), count=document.getElementById('viewerCount'), input=document.getElementById('viewerName'), submit=document.getElementById('viewerSubmit');
+  if(!gate||!trigger||!overlay)return;
+  const key='prazzh_bio_viewers_v2', visitorKey='prazzh_my_visitor_name_v1';
+  let viewers=[];
+  try{viewers=JSON.parse(localStorage.getItem(key)||'[]'); if(!Array.isArray(viewers)) viewers=[];}catch(e){viewers=[];}
+  function safeName(name){return (name||'Anonymous').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+  function render(){
+    count.textContent=viewers.length;
+    if(!viewers.length){list.innerHTML='<div class="viewer-empty">No named visitors yet.<br>Some people leave quietly.</div>';return;}
+    list.innerHTML=viewers.slice().reverse().map(v=>{const safe=safeName(v.name);const t=new Date(v.time);const when=isNaN(t)?'recently':t.toLocaleString([], {day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});return '<div class="viewer-row"><div class="viewer-avatar">'+safe.charAt(0).toUpperCase()+'</div><div class="viewer-info"><div class="viewer-name">'+safe+'</div><div class="viewer-time">viewed · '+when+'</div></div></div>';}).join('');
+  }
+  function save(){try{localStorage.setItem(key,JSON.stringify(viewers.slice(-100)));}catch(e){}}
+  function record(name){const clean=name.trim();if(!clean)return;viewers.push({name:clean,time:Date.now()});save();render();}
+  function closeGate(){gate.classList.remove('open');gate.setAttribute('aria-hidden','true');}
+  function enter(){const name=gateInput.value.trim();if(!name){gateInput.focus();return;}localStorage.setItem(visitorKey,name);record(name);closeGate();}
+  let saved='';try{saved=localStorage.getItem(visitorKey)||'';}catch(e){}
+  if(!saved){setTimeout(()=>{gate.classList.add('open');gate.setAttribute('aria-hidden','false');gateInput.focus();},450);}
+  gateEnter.addEventListener('click',enter);gateInput.addEventListener('keydown',e=>{if(e.key==='Enter')enter();});
+  function open(){overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');render();setTimeout(()=>input&&input.focus(),180)}
+  function shut(){overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true')}
+  trigger.addEventListener('click',open);close.addEventListener('click',shut);overlay.addEventListener('click',e=>{if(e.target===overlay)shut()});document.addEventListener('keydown',e=>{if(e.key==='Escape'){shut();}});
+  submit.addEventListener('click',()=>{const name=input.value.trim();if(!name)return;record(name);input.value='';});input.addEventListener('keydown',e=>{if(e.key==='Enter')submit.click()});render();
+})();
 
 // SOUND — Background music
 const btn=document.getElementById('snd');
