@@ -285,7 +285,7 @@ main, section, .band, .origin, .love-wrap, .poetry, .hindi-s, .interlude, .space
     <div class="viewer-sign">
       <p>leave your name</p>
       <div class="viewer-form"><input id="viewerName" maxlength="32" autocomplete="off" placeholder="your name…"><button id="viewerSubmit" type="button">enter</button></div>
-      <p class="viewer-note">A private, Instagram-style guest list. Cloud sync is active.</p>
+      <p class="viewer-note">A private, Instagram-style guest list. Names are saved in this browser only.</p>
     </div>
   </div>
 </div>
@@ -638,22 +638,15 @@ if(loveListEl){
 }
 
 
-// SECRET BIOGRAPHY VIEWERS + VISITOR NAME GATE + OPTIONAL CLOUD SYNC
+// SECRET BIOGRAPHY VIEWERS + VISITOR NAME GATE
 (function(){
   const gate=document.getElementById('visitorGate'), gateInput=document.getElementById('visitorGateName'), gateEnter=document.getElementById('visitorGateEnter');
   const trigger=document.getElementById('viewerTrigger'), overlay=document.getElementById('viewerOverlay'), close=document.getElementById('viewerClose');
   const list=document.getElementById('viewerList'), count=document.getElementById('viewerCount'), input=document.getElementById('viewerName'), submit=document.getElementById('viewerSubmit');
   if(!gate||!gateInput||!gateEnter)return;
 
-  // CLOUD SETUP:
-  // Replace these two values after creating a Supabase project.
-  // The site still works locally if these remain blank.
-  const CLOUD_URL = 'https://odfqfkqprvxslslhjxfj.supabase.co';
-  const CLOUD_ANON_KEY = 'sb_publishable_pSX9OmeSDa4cVqytpwVswQ_B7eu9Stb';
-  const cloudReady = /^https:\/\/[^\s]+\.supabase\.co$/.test(CLOUD_URL) && CLOUD_ANON_KEY.length > 20;
-  const cloudHeaders = cloudReady ? {'apikey':CLOUD_ANON_KEY,'Authorization':'Bearer '+CLOUD_ANON_KEY,'Content-Type':'application/json'} : null;
-  const key='prazzh_bio_viewers_v4';
-  const visitorKey='prazzh_my_visitor_name_session_v2';
+  const key='prazzh_bio_viewers_v3';
+  const visitorKey='prazzh_my_visitor_name_session_v1';
   let viewers=[];
   try{viewers=JSON.parse(localStorage.getItem(key)||'[]');if(!Array.isArray(viewers))viewers=[];}catch(e){viewers=[];}
   const safeName=n=>(n||'Anonymous').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -664,62 +657,65 @@ if(loveListEl){
       : viewers.slice().reverse().map(v=>{const n=safeName(v.name),d=new Date(v.time),w=isNaN(d)?'recently':d.toLocaleString([],{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});return `<div class="viewer-row"><div class="viewer-avatar">${n.charAt(0).toUpperCase()}</div><div class="viewer-info"><div class="viewer-name">${n}</div><div class="viewer-time">viewed · ${w}</div></div></div>`}).join('');
   }
   function save(){try{localStorage.setItem(key,JSON.stringify(viewers.slice(-100)));}catch(e){}}
-  async function cloudFetch(){
-    if(!cloudReady)return;
-    try{
-      const r=await fetch(CLOUD_URL+'/rest/v1/bio_viewers?select=name,time&order=time.asc&limit=200',{headers:cloudHeaders,cache:'no-store'});
-      if(!r.ok)throw new Error('cloud read '+r.status);
-      const rows=await r.json();
-      viewers=Array.isArray(rows)?rows.map(x=>({name:x.name,time:x.time})):[];
-      save(); render();
-    }catch(e){ console.warn('Cloud viewer sync unavailable:',e); }
-  }
-  async function record(name){
-    const clean=name.trim();if(!clean)return;
-    const item={name:clean,time:new Date().toISOString()};
-    viewers.push(item);save();render();
-    if(cloudReady){
-      try{
-        const r=await fetch(CLOUD_URL+'/rest/v1/bio_viewers',{method:'POST',headers:{...cloudHeaders,'Prefer':'return=minimal'},body:JSON.stringify(item)});
-        if(!r.ok)throw new Error('cloud write '+r.status);
-        await cloudFetch();
-      }catch(e){ console.warn('Cloud viewer save unavailable:',e); }
-    }
-  }
+  function record(name){const clean=name.trim();if(!clean)return;viewers.push({name:clean,time:Date.now()});save();render();}
 
   let gateOpen=false, triggered=false;
   function showGate(){
-    if(gateOpen)return; gateOpen=true;
-    gate.classList.add('open'); gate.setAttribute('aria-hidden','false'); document.body.classList.add('gate-locked');
+    if(gateOpen)return;
+    gateOpen=true;
+    gate.classList.add('open');
+    gate.setAttribute('aria-hidden','false');
+    document.body.classList.add('gate-locked');
     setTimeout(()=>{gateInput.focus();gateInput.select();},120);
   }
-  async function enter(){
-    const name=gateInput.value.trim(); if(!name){gateInput.focus();return;}
+  function enter(){
+    const name=gateInput.value.trim();
+    if(!name){gateInput.focus();return;}
     try{sessionStorage.setItem(visitorKey,name);}catch(e){}
-    await record(name);
-    gate.classList.remove('open'); gate.setAttribute('aria-hidden','true'); document.body.classList.remove('gate-locked'); gateOpen=false;
+    record(name);
+    gate.classList.remove('open');
+    gate.setAttribute('aria-hidden','true');
+    document.body.classList.remove('gate-locked');
+    gateOpen=false;
   }
 
-  // AUTOMATIC: the prompt appears after the visitor scrolls beyond the intro.
+  // AUTOMATIC: show the name prompt after the visitor scrolls past the intro.
+  // sessionStorage means every fresh page visit gets the prompt again.
   let alreadyNamed=''; try{alreadyNamed=sessionStorage.getItem(visitorKey)||'';}catch(e){}
   const hero=document.getElementById('me');
   if(hero && !alreadyNamed){
-    const triggerPoint=Math.max(160, Math.min(hero.offsetHeight-40, Math.round(hero.offsetHeight*0.35)));
+    const triggerPoint=Math.max(120, Math.round(hero.offsetHeight*0.28));
     const check=()=>{
       if(triggered||gateOpen)return;
-      if(window.scrollY>=triggerPoint){triggered=true;showGate();window.removeEventListener('scroll',check);window.removeEventListener('wheel',check);window.removeEventListener('touchmove',check);}
+      if(window.scrollY >= triggerPoint){
+        triggered=true;
+        showGate();
+        window.removeEventListener('scroll',check);
+        window.removeEventListener('wheel',check);
+        window.removeEventListener('touchmove',check);
+      }
     };
-    window.addEventListener('scroll',check,{passive:true}); window.addEventListener('wheel',check,{passive:true}); window.addEventListener('touchmove',check,{passive:true}); setTimeout(check,300);
+    window.addEventListener('scroll',check,{passive:true});
+    window.addEventListener('wheel',check,{passive:true});
+    window.addEventListener('touchmove',check,{passive:true});
+    setTimeout(check,300);
   }
 
-  gateEnter.addEventListener('click',enter); gateInput.addEventListener('keydown',e=>{if(e.key==='Enter')enter();});
+  gateEnter.addEventListener('click',enter);
+  gateInput.addEventListener('keydown',e=>{if(e.key==='Enter')enter();});
+
   if(trigger&&overlay&&close){
-    const open=async()=>{overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');render();await cloudFetch();setTimeout(()=>input&&input.focus(),150)};
+    const open=()=>{overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');render();setTimeout(()=>input&&input.focus(),150)};
     const shut=()=>{overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true')};
-    trigger.addEventListener('click',open);close.addEventListener('click',shut);overlay.addEventListener('click',e=>{if(e.target===overlay)shut()});document.addEventListener('keydown',e=>{if(e.key==='Escape')shut()});
+    trigger.addEventListener('click',open);close.addEventListener('click',shut);
+    overlay.addEventListener('click',e=>{if(e.target===overlay)shut()});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')shut()});
   }
-  if(submit&&input){submit.addEventListener('click',()=>{const n=input.value.trim();if(!n)return;record(n);input.value=''});input.addEventListener('keydown',e=>{if(e.key==='Enter')submit.click()});}
-  render(); cloudFetch();
+  if(submit&&input){
+    submit.addEventListener('click',()=>{const n=input.value.trim();if(!n)return;record(n);input.value=''});
+    input.addEventListener('keydown',e=>{if(e.key==='Enter')submit.click()});
+  }
+  render();
 })();
 </script>
 </html>
